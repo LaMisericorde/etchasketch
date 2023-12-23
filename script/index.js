@@ -3,15 +3,16 @@
 const rangeGridSize = document.querySelector("#range-grid-size");
 const numberGridSize = document.querySelector("#number-grid-size");
 
-numberGridSize.addEventListener("input", () => {
-    rangeGridSize.value = numberGridSize.value;
-});
-
 rangeGridSize.addEventListener("input", () => {
     numberGridSize.value = rangeGridSize.value;
 });
 
+numberGridSize.addEventListener("input", () => {
+    rangeGridSize.value = numberGridSize.value;
+});
+
 rangeGridSize.addEventListener("input", start);
+numberGridSize.addEventListener("input", start);
 
 function start() {
     removeGrid();
@@ -20,27 +21,24 @@ function start() {
 
 function createGrid(gridSize) {
     const gridContainer = document.querySelector(".grid-container");
-    let gridBoxPixelSize = calculateGridBoxPixelSize(gridSize);
+    
     for (let i = 0; i < gridSize; i++) {
         const gridRow = document.createElement("div");
         gridRow.classList.add("grid-row");
         for (let j = 0; j < gridSize; j++) {
             const gridBox = document.createElement("div");
-            gridBox.classList.add("grid-box");
-            gridBox.style.backgroundColor = gridBackgroundColor.value;
-            gridBox.style.height = `${gridBoxPixelSize}px`;
-            gridBox.style.width = `${gridBoxPixelSize}px`;  
+            setGridBoxAttributes(gridSize, gridBox)
             gridRow.appendChild(gridBox);
         }
         gridContainer.appendChild(gridRow);
     }
 }
 
-function calculateGridBoxPixelSize(gridSize) {
-    let gridContainerPixelSize = 480;
-    let gridBoxPixelSize = gridContainerPixelSize / gridSize;
-    return gridBoxPixelSize;
-}
+// function calculateGridBoxPixelSize(gridSize) {
+//     let gridContainerPixelSize = 480;
+//     let gridBoxPixelSize = gridContainerPixelSize / gridSize;
+//     return gridBoxPixelSize;
+// }
 
 function removeGrid() {
     const gridContainer = document.querySelector(".grid-container");
@@ -64,4 +62,17 @@ function changeBackgroundColor() {
 
 // Hover over color changing
 
-// const gridBoxes = document.querySelectorAll(".grid-box");
+function setGridBoxAttributes(gridSize, gridBox) {
+    // let gridBoxPixelSize = calculateGridBoxPixelSize(gridSize);
+    gridBox.classList.add("grid-box");
+    gridBox.style.backgroundColor = gridBackgroundColor.value;
+    // gridBox.style.height = `${gridBoxPixelSize}px`;
+    // gridBox.style.width = `${gridBoxPixelSize}px`; 
+    gridBox.addEventListener("mouseover", (e) => {
+        gridBox.style.backgroundColor = "red";
+    });
+    gridBox.addEventListener("mousedown", () => {
+        gridBox.style.backgroundColor = "red";
+    });
+}
+
