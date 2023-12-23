@@ -2,6 +2,10 @@
 
 const rangeGridSize = document.querySelector("#range-grid-size");
 const numberGridSize = document.querySelector("#number-grid-size");
+const DEFAULT_GRID_SIZE = 16;
+
+rangeGridSize.value = DEFAULT_GRID_SIZE;
+numberGridSize.value = DEFAULT_GRID_SIZE;
 
 rangeGridSize.addEventListener("input", () => {
     numberGridSize.value = rangeGridSize.value;
@@ -44,6 +48,8 @@ function removeGrid() {
 // Background Color Changer
 
 const gridBackgroundColor = document.querySelector("#background-color-picker");
+const DEFAULT_BACKGROUND_COLOR = "#ffffff";
+gridBackgroundColor.value = DEFAULT_BACKGROUND_COLOR;
 
 gridBackgroundColor.addEventListener("input", changeBackgroundColor);
 
@@ -59,22 +65,26 @@ function changeBackgroundColor() {
 function setGridBoxAttributes(gridSize, gridBox) {
     gridBox.classList.add("grid-box");
     gridBox.style.backgroundColor = gridBackgroundColor.value;
-    gridBox.addEventListener("mouseover", () => {
-        if (detectLeftButton()) {
+    gridBox.addEventListener("mouseover", (e) => {
+        if (detectLeftButton(e)) {
             gridBox.style.backgroundColor = "red";
         }
     });
-    // gridBox.addEventListener("keydown", () => {
-    //     gridBox.style.backgroundColor = "red";
-    // });
+    gridBox.addEventListener("mousedown", (e) => {
+        if (detectLeftButton(e)) {
+            gridBox.style.backgroundColor = "red";
+        }
+    });
 }
 
-function detectLeftButton(evt) {
-    evt = evt || window.event;
-    if ("buttons" in evt) {
-        return evt.buttons == 1;
+function detectLeftButton(event) {
+    if ("buttons" in event) {
+        return event.buttons == 1;
     }
-    let button = evt.which || evt.button;
-    return button == 1;
 }
 
+
+
+
+
+start();
