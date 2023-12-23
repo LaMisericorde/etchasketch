@@ -13,6 +13,7 @@ rangeGridSize.addEventListener("input", () => {
 
 numberGridSize.addEventListener("input", () => {
     rangeGridSize.value = numberGridSize.value;
+    
 });
 
 rangeGridSize.addEventListener("input", start);
@@ -53,7 +54,7 @@ function setGridBoxAttributes(gridSize, gridBox) {
     gridBox.addEventListener("mouseover", (e) => {
         if (detectLeftButton(e)) {
             gridBox.style.backgroundColor = drawColor;
-        }
+            }
     });
     gridBox.addEventListener("mousedown", (e) => {
         if (detectLeftButton(e)) {
@@ -96,9 +97,20 @@ function changeDrawColor() {
     drawColor = gridDrawColor.value;
 }
 
+// Canvas Size
 
+const numberCanvasSize = document.querySelector("#number-canvas-size");
+const gridContainer = document.querySelector(".grid-container");
+const DEFAULT_CANVAS_SIZE = "480px";
+gridContainer.style.height = DEFAULT_CANVAS_SIZE;
+gridContainer.style.width = DEFAULT_CANVAS_SIZE;
 
+numberCanvasSize.addEventListener("input", () => {
+    gridContainer.style.height = `${numberCanvasSize.value}px`;
+    gridContainer.style.width = `${numberCanvasSize.value}px`; 
+});
 
+numberCanvasSize.addEventListener("input", start);
 
 
 start();
