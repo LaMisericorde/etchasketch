@@ -13,17 +13,17 @@ function createGrid(gridSize) {
     const gridContainer = document.querySelector(".grid-container");
     let gridBoxPixelSize = calculateGridBoxPixelSize(gridSize);
     for (let i = 0; i < gridSize; i++) {
-        const rowGridContainer = document.createElement("div");
-        rowGridContainer.classList.add("grid-row");
+        const gridRow = document.createElement("div");
+        gridRow.classList.add("grid-row");
         for (let j = 0; j < gridSize; j++) {
             const gridBox = document.createElement("div");
             gridBox.classList.add("grid-box");
             gridBox.style.backgroundColor = gridBackgroundColor.value;
             gridBox.style.height = `${gridBoxPixelSize}px`;
             gridBox.style.width = `${gridBoxPixelSize}px`;  
-            rowGridContainer.appendChild(gridBox);
+            gridRow.appendChild(gridBox);
         }
-        gridContainer.appendChild(rowGridContainer);
+        gridContainer.appendChild(gridRow);
     }
 }
 
@@ -52,3 +52,5 @@ function changeBackgroundColor() {
         gridBox.style.backgroundColor = gridBackgroundColor.value;
     });
 }
+
+// Hover over color changing
