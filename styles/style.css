@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+}
+
+.settings-container {
+    width: 25vw;
+    height: 100vh;
+    background-color: red;
+}
+
+.display-container {
+    width: 75vw;
+    height: 100vh; 
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-container {
+    /* width: 480px;
+    height: 480px; */
+    display: flex;
+    flex-direction: column;
+
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.grid-row {
+    flex: 1 0 auto;
+    display: flex;
+}
+
+.grid-box {
+    flex: 1 0 auto;
+    border: 1px solid black;
+}

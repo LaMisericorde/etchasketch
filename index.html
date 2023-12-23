@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="./script/index.js" defer></script>
+    <title>Etch a Sketch</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="settings-container">
+            <div class="canvas-setting">
+                <p>Size of the canvas in pixels</p>
+                <input type="number" id="number-canvas-size" name="number-canvas-size" min="300" max="800" value="480">
+            </div>
+
+            <div class="size-setting">
+                <p>Size of the grid</p>
+                <input type="range" id="range-grid-size" name="range-grid-size" min="1" max="100">
+                <input type="number" id="number-grid-size" name="number-grid-size" min="1" max="100">
+            </div>
+
+            <div class="background-color-setting">
+                <p>Background color</p>
+                <input type="color" id="background-color-picker" name="background-color-picker">
+            </div>
+
+            <div class="draw-color-setting">
+                <p>Choose your color</p>
+                <input type="color" id="draw-color-picker" name="draw-color-picker">
+            </div>
+
+        </div>
+
+        <div class="display-container">
+            <div class="grid-container">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
