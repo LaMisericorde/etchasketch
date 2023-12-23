@@ -1,6 +1,15 @@
 // Creating the grid
 
-const rangeGridSize = document.querySelector("#range");
+const rangeGridSize = document.querySelector("#range-grid-size");
+const numberGridSize = document.querySelector("#number-grid-size");
+
+numberGridSize.addEventListener("input", () => {
+    rangeGridSize.value = numberGridSize.value;
+});
+
+rangeGridSize.addEventListener("input", () => {
+    numberGridSize.value = rangeGridSize.value;
+});
 
 rangeGridSize.addEventListener("input", start);
 
@@ -42,7 +51,7 @@ function removeGrid() {
 
 // Background Color Changer
 
-const gridBackgroundColor = document.querySelector("#bg-color-picker");
+const gridBackgroundColor = document.querySelector("#background-color-picker");
 
 gridBackgroundColor.addEventListener("input", changeBackgroundColor);
 
@@ -54,3 +63,5 @@ function changeBackgroundColor() {
 }
 
 // Hover over color changing
+
+// const gridBoxes = document.querySelectorAll(".grid-box");
