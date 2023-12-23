@@ -45,6 +45,29 @@ function removeGrid() {
     }
 }
 
+// Hover over color changing
+
+function setGridBoxAttributes(gridSize, gridBox) {
+    gridBox.classList.add("grid-box");
+    gridBox.style.backgroundColor = gridBackgroundColor.value;
+    gridBox.addEventListener("mouseover", (e) => {
+        if (detectLeftButton(e)) {
+            gridBox.style.backgroundColor = drawColor;
+        }
+    });
+    gridBox.addEventListener("mousedown", (e) => {
+        if (detectLeftButton(e)) {
+            gridBox.style.backgroundColor = drawColor;
+        }
+    });
+}
+
+function detectLeftButton(event) {
+    if ("buttons" in event) {
+        return event.buttons == 1;
+    }
+}
+
 // Background Color Changer
 
 const gridBackgroundColor = document.querySelector("#background-color-picker");
@@ -60,28 +83,19 @@ function changeBackgroundColor() {
     });
 }
 
-// Hover over color changing
+// Draw Color Changer
 
-function setGridBoxAttributes(gridSize, gridBox) {
-    gridBox.classList.add("grid-box");
-    gridBox.style.backgroundColor = gridBackgroundColor.value;
-    gridBox.addEventListener("mouseover", (e) => {
-        if (detectLeftButton(e)) {
-            gridBox.style.backgroundColor = "red";
-        }
-    });
-    gridBox.addEventListener("mousedown", (e) => {
-        if (detectLeftButton(e)) {
-            gridBox.style.backgroundColor = "red";
-        }
-    });
+const gridDrawColor = document.querySelector("#draw-color-picker");
+const DEFAULT_DRAW_COLOR = "#000000";
+let drawColor = DEFAULT_DRAW_COLOR;
+gridDrawColor.value = DEFAULT_DRAW_COLOR;
+
+gridDrawColor.addEventListener("input", changeDrawColor);
+
+function changeDrawColor() {
+    drawColor = gridDrawColor.value;
 }
 
-function detectLeftButton(event) {
-    if ("buttons" in event) {
-        return event.buttons == 1;
-    }
-}
 
 
 
