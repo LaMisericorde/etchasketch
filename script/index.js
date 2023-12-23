@@ -34,12 +34,6 @@ function createGrid(gridSize) {
     }
 }
 
-// function calculateGridBoxPixelSize(gridSize) {
-//     let gridContainerPixelSize = 480;
-//     let gridBoxPixelSize = gridContainerPixelSize / gridSize;
-//     return gridBoxPixelSize;
-// }
-
 function removeGrid() {
     const gridContainer = document.querySelector(".grid-container");
     while (gridContainer.firstChild) {
@@ -63,16 +57,24 @@ function changeBackgroundColor() {
 // Hover over color changing
 
 function setGridBoxAttributes(gridSize, gridBox) {
-    // let gridBoxPixelSize = calculateGridBoxPixelSize(gridSize);
     gridBox.classList.add("grid-box");
     gridBox.style.backgroundColor = gridBackgroundColor.value;
-    // gridBox.style.height = `${gridBoxPixelSize}px`;
-    // gridBox.style.width = `${gridBoxPixelSize}px`; 
-    gridBox.addEventListener("mouseover", (e) => {
-        gridBox.style.backgroundColor = "red";
+    gridBox.addEventListener("mouseover", () => {
+        if (detectLeftButton()) {
+            gridBox.style.backgroundColor = "red";
+        }
     });
-    gridBox.addEventListener("mousedown", () => {
-        gridBox.style.backgroundColor = "red";
-    });
+    // gridBox.addEventListener("keydown", () => {
+    //     gridBox.style.backgroundColor = "red";
+    // });
+}
+
+function detectLeftButton(evt) {
+    evt = evt || window.event;
+    if ("buttons" in evt) {
+        return evt.buttons == 1;
+    }
+    let button = evt.which || evt.button;
+    return button == 1;
 }
 
