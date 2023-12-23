@@ -1,7 +1,12 @@
-function calculateGridBoxPixelSize(gridSize) {
-    let gridContainerPixelSize = 480;
-    let gridBoxPixelSize = gridContainerPixelSize / gridSize;
-    return gridBoxPixelSize;
+// Creating the grid
+
+const rangeGridSize = document.querySelector("#range");
+
+rangeGridSize.addEventListener("input", start);
+
+function start() {
+    removeGrid();
+    createGrid(rangeGridSize.value);
 }
 
 function createGrid(gridSize) {
@@ -11,14 +16,21 @@ function createGrid(gridSize) {
         const rowGridContainer = document.createElement("div");
         rowGridContainer.classList.add("grid-row");
         for (let j = 0; j < gridSize; j++) {
-            const box = document.createElement("div");
-            box.classList.add("grid-box");
-            box.style.height = `${gridBoxPixelSize}px`;
-            box.style.width = `${gridBoxPixelSize}px`;  
-            rowGridContainer.appendChild(box);
+            const gridBox = document.createElement("div");
+            gridBox.classList.add("grid-box");
+            gridBox.style.backgroundColor = gridBackgroundColor.value;
+            gridBox.style.height = `${gridBoxPixelSize}px`;
+            gridBox.style.width = `${gridBoxPixelSize}px`;  
+            rowGridContainer.appendChild(gridBox);
         }
         gridContainer.appendChild(rowGridContainer);
     }
+}
+
+function calculateGridBoxPixelSize(gridSize) {
+    let gridContainerPixelSize = 480;
+    let gridBoxPixelSize = gridContainerPixelSize / gridSize;
+    return gridBoxPixelSize;
 }
 
 function removeGrid() {
@@ -28,10 +40,15 @@ function removeGrid() {
     }
 }
 
-const rangeGridSize = document.querySelector("#range");
-function start() {
-    removeGrid();
-    createGrid(rangeGridSize.value);
-}
+// Background Color Changer
 
-rangeGridSize.addEventListener("input", start);
+const gridBackgroundColor = document.querySelector("#bg-color-picker");
+
+gridBackgroundColor.addEventListener("input", changeBackgroundColor);
+
+function changeBackgroundColor() {
+    const gridBoxNodes = document.querySelectorAll(".grid-box");
+    gridBoxNodes.forEach((gridBox) => {
+        gridBox.style.backgroundColor = gridBackgroundColor.value;
+    });
+}
