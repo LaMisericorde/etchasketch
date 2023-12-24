@@ -22,8 +22,6 @@
 }
 
 .grid-container {
-    /* width: 480px;
-    height: 480px; */
     display: flex;
     flex-direction: column;
 
@@ -41,5 +39,9 @@
 
 .grid-box {
     flex: 1 0 auto;
-    border: 1px solid black;
+    border: 1px solid #1f1f1f;
+}
+
+button {
+    display: block;
 }
