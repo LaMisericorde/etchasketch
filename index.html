@@ -9,7 +9,10 @@
 </head>
 <body>
     <div class="main-container">
+
+        <!-- Settings part -->
         <div class="settings-container">
+
             <div class="canvas-setting">
                 <p>Size of the canvas in pixels</p>
                 <input type="number" id="number-canvas-size" name="number-canvas-size" min="300" max="800" value="480">
@@ -26,18 +29,19 @@
                 <input type="color" id="background-color-picker" name="background-color-picker">
             </div>
 
-            <div class="draw-color-setting">
+            <div class="color-mode-setting">
                 <p>Choose your color</p>
-                <input type="color" id="draw-color-picker" name="draw-color-picker">
+                <input type="color" id="color-mode-picker" name="color-mode-picker">
             </div>
             <button class="color-mode-button">Color Mode</button>
             <button class="rainbow-mode-button">Rainbow Mode</button>
-            <button class="increasing-dark-mode-button">Increase Darkness</button>
+            <!-- <button class="increasing-dark-mode-button">Increase Darkness</button> -->
             <button class="eraser-mode-button">Eraser</button>
             <button class="clear-mode-button">Clear all</button>
 
         </div>
-
+        
+        <!-- Display part -->
         <div class="display-container">
             <div class="grid-container">
 

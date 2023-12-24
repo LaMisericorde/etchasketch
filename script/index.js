@@ -1,8 +1,41 @@
-// Creating the grid
+// Variables
+const DEFAULT_CANVAS_SIZE = "480";
+const DEFAULT_GRID_SIZE = 16;
+const DEFAULT_BACKGROUND_COLOR = "#ffffff";
+const DEFAULT_COLOR_MODE_COLOR = "#000000";
 
+const numberCanvasSize = document.querySelector("#number-canvas-size");
 const rangeGridSize = document.querySelector("#range-grid-size");
 const numberGridSize = document.querySelector("#number-grid-size");
-const DEFAULT_GRID_SIZE = 16;
+
+const gridBackgroundColor = document.querySelector("#background-color-picker");
+const colorModeColor = document.querySelector("#color-mode-picker");
+
+const colorMode = document.querySelector(".color-mode-button");
+const rainbowMode = document.querySelector(".rainbow-mode-button");
+const increasingMode = document.querySelector(".increase-dark-mode-button");
+const eraserMode = document.querySelector(".eraser-mode-button");
+const clearMode = document.querySelector(".clear-mode-button");
+
+let drawColor = DEFAULT_COLOR_MODE_COLOR;
+let drawMode = 0;
+
+const gridContainer = document.querySelector(".grid-container");
+
+// Canvas Size - 
+
+numberCanvasSize.value = DEFAULT_CANVAS_SIZE;
+gridContainer.style.height = `${numberCanvasSize.value}px`;
+gridContainer.style.width = `${numberCanvasSize.value}px`;
+
+numberCanvasSize.addEventListener("input", () => {
+    gridContainer.style.height = `${numberCanvasSize.value}px`;
+    gridContainer.style.width = `${numberCanvasSize.value}px`; 
+});
+
+numberCanvasSize.addEventListener("input", start);
+
+// Creating the grid
 
 rangeGridSize.value = DEFAULT_GRID_SIZE;
 numberGridSize.value = DEFAULT_GRID_SIZE;
@@ -25,8 +58,6 @@ function start() {
 }
 
 function createGrid(gridSize) {
-    const gridContainer = document.querySelector(".grid-container");
-    
     for (let i = 0; i < gridSize; i++) {
         const gridRow = document.createElement("div");
         gridRow.classList.add("grid-row");
@@ -40,54 +71,38 @@ function createGrid(gridSize) {
 }
 
 function removeGrid() {
-    const gridContainer = document.querySelector(".grid-container");
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild);
     }
 }
+
 
 // Hover over color changing
 
 function setGridBoxAttributes(gridBox) {
     gridBox.classList.add("grid-box");
     gridBox.style.backgroundColor = gridBackgroundColor.value;
-    gridBox.addEventListener("mouseover", (e) => {
-        if (detectLeftButton(e)) {
-            drawColor = returnColorBasedOnMode();
-            gridBox.style.backgroundColor = drawColor;
-            }
+    gridBox.addEventListener("mouseover", (event) => {
+        applyColor(event, gridBox);
     });
-    gridBox.addEventListener("mousedown", (e) => {
-        if (detectLeftButton(e)) {
-            drawColor = returnColorBasedOnMode();
-            gridBox.style.backgroundColor = drawColor;
-        }
+    gridBox.addEventListener("mousedown", (event) => {
+        applyColor(event, gridBox);
     });
+}
+
+function applyColor(event, gridBox) {
+    if (detectLeftButton(event)) {
+        drawColor = returnColorBasedOnMode();
+        gridBox.style.backgroundColor = drawColor;
+    }
 }
 
 function detectLeftButton(event) {
         return event.buttons == 1;
 }
 
-// Canvas Size
-
-const numberCanvasSize = document.querySelector("#number-canvas-size");
-const gridContainer = document.querySelector(".grid-container");
-const DEFAULT_CANVAS_SIZE = "480px";
-gridContainer.style.height = DEFAULT_CANVAS_SIZE;
-gridContainer.style.width = DEFAULT_CANVAS_SIZE;
-
-numberCanvasSize.addEventListener("input", () => {
-    gridContainer.style.height = `${numberCanvasSize.value}px`;
-    gridContainer.style.width = `${numberCanvasSize.value}px`; 
-});
-
-numberCanvasSize.addEventListener("input", start);
-
 // Background Color Changer
 
-const gridBackgroundColor = document.querySelector("#background-color-picker");
-const DEFAULT_BACKGROUND_COLOR = "#ffffff";
 gridBackgroundColor.value = DEFAULT_BACKGROUND_COLOR;
 
 gridBackgroundColor.addEventListener("input", changeBackgroundColor);
@@ -101,42 +116,28 @@ function changeBackgroundColor() {
 
 // Draw Color Changer
 
-const gridDrawColor = document.querySelector("#draw-color-picker");
-const DEFAULT_DRAW_COLOR = "#000000";
-let drawColor = DEFAULT_DRAW_COLOR;
-gridDrawColor.value = DEFAULT_DRAW_COLOR;
+colorModeColor.value = DEFAULT_COLOR_MODE_COLOR;
 
-gridDrawColor.addEventListener("input", changeDrawColor);
+colorModeColor.addEventListener("click", changeDrawColor);
 
 function changeDrawColor() {
-    drawColor = gridDrawColor.value;
+    drawMode = 0;
+    drawColor = colorModeColor.value;
 }
-
-// Rainbow Draw Mode
-
-let drawMode = 0;
-
-const rainbowMode = document.querySelector(".rainbow-mode-button");
-const colorMode = document.querySelector(".color-mode-button");
-
-rainbowMode.addEventListener("click", () => {
-    drawMode = 1;
-});
 
 colorMode.addEventListener("click", () => {
     drawMode = 0;
+    removeOldActiveButton();
+    colorMode.classList.add("active-button");
 });
 
-function returnColorBasedOnMode() {
-    let color;
-    if (drawMode == 0) {
-        color = gridDrawColor.value;
-        return color;
-    } else if (drawMode == 1) {
-        color = createRandomColor();
-        return color;
-    }
-}
+// Rainbow Draw Mode
+
+rainbowMode.addEventListener("click", () => {
+    drawMode = 1;
+    removeOldActiveButton();
+    rainbowMode.classList.add("active-button");
+});
 
 function createRandomColor() {
     let red = Math.floor(Math.random() * 256);
@@ -146,6 +147,47 @@ function createRandomColor() {
     return randomColor;
 }
 
+// Increase Darkness Mode 
 
-// This start creates the initial grid with the default settings of 16x16;
+// increasingMode.addEventListener("click", () => {
+//     drawMode = 2;
+// });
+
+// Eraser Mode
+
+eraserMode.addEventListener("click", () => {
+    drawMode = 3;
+    removeOldActiveButton();
+    eraserMode.classList.add("active-button");
+});
+
+// Clear All
+
+clearMode.addEventListener("click", changeBackgroundColor);
+
+// Remove active button from non active buttons
+
+function removeOldActiveButton() {
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.classList.remove("active-button");
+    });
+    }
+
+// Color mode = 0; rainbow mode = 1; increasing dark mode = 2; eraser mode = 3;
+function returnColorBasedOnMode() {
+    let color;
+    if (drawMode == 0) {
+        color = colorModeColor.value;
+        return color;
+    } else if (drawMode == 1) {
+        color = createRandomColor();
+        return color;
+    } else if (drawMode == 3) {
+        color = gridBackgroundColor.value;
+        return color;
+    }
+}
+
+// This start creates the initial grid with the default settings of 16x16 480px canvas white background and black color mode;
 start();

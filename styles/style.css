@@ -7,11 +7,23 @@
     display: flex;
 }
 
+/* Settings part of the screen */
+
 .settings-container {
     width: 25vw;
     height: 100vh;
     background-color: red;
 }
+
+button {
+    display: block;
+}
+
+.active-button {
+    background-color: yellow;
+}
+
+/* Display part of the screen */
 
 .display-container {
     width: 75vw;
@@ -40,8 +52,4 @@
 .grid-box {
     flex: 1 0 auto;
     border: 1px solid #1f1f1f;
-}
-
-button {
-    display: block;
 }
