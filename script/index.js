@@ -28,7 +28,13 @@ numberCanvasSize.value = DEFAULT_CANVAS_SIZE;
 gridContainer.style.height = `${numberCanvasSize.value}px`;
 gridContainer.style.width = `${numberCanvasSize.value}px`;
 
-numberCanvasSize.addEventListener("input", () => {
+numberCanvasSize.addEventListener("change", () => {
+    if (numberCanvasSize.value < 300) {
+        numberCanvasSize.value = 300;
+    }
+    if (numberCanvasSize.value > 800) {
+        numberCanvasSize.value = 800;
+    }
     gridContainer.style.height = `${numberCanvasSize.value}px`;
     gridContainer.style.width = `${numberCanvasSize.value}px`; 
 });
@@ -46,7 +52,15 @@ rangeGridSize.addEventListener("input", () => {
 
 numberGridSize.addEventListener("input", () => {
     rangeGridSize.value = numberGridSize.value;
-    
+});
+
+numberGridSize.addEventListener("change", () => {
+    if (numberGridSize.value < 1) {
+        numberGridSize.value = 1;
+    }
+    if (numberGridSize.value > 100) {
+        numberGridSize.value = 100;
+    }
 });
 
 rangeGridSize.addEventListener("input", start);
@@ -148,16 +162,10 @@ function createRandomColor() {
     return randomColor;
 }
 
-// Increase Darkness Mode 
-
-// increasingMode.addEventListener("click", () => {
-//     drawMode = 2;
-// });
-
 // Eraser Mode
 
 eraserMode.addEventListener("click", () => {
-    drawMode = 3;
+    drawMode = 2;
     removeOldActiveButton();
     eraserMode.classList.add("active-button");
 });
@@ -175,7 +183,7 @@ function removeOldActiveButton() {
     });
     }
 
-// Color mode = 0; rainbow mode = 1; increasing dark mode = 2; eraser mode = 3;
+// Color mode = 0; rainbow mode = 1; eraser mode = 2;
 function returnColorBasedOnMode() {
     let color;
     if (drawMode == 0) {
@@ -184,7 +192,7 @@ function returnColorBasedOnMode() {
     } else if (drawMode == 1) {
         color = createRandomColor();
         return color;
-    } else if (drawMode == 3) {
+    } else if (drawMode == 2) {
         color = gridBackgroundColor.value;
         return color;
     }

@@ -28,13 +28,33 @@ p {
     margin-bottom: 12px;
 }
 
+.size-inputs {
+    display: flex;
+    align-items: center;
+}
+
 input {
     height: 20px;
     width: 128px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid #2e2e2e;
+    outline: none;
+}
+
+input[type="range"] {
+    accent-color: #0b6ff4;
 }
 
 input[type="color"] {
     height: 32px;
+}
+
+input[type="color"]:hover {
+    border: 2px solid white;
 }
 
 #range-grid-size {
@@ -58,7 +78,7 @@ button {
     background-color: white;
     color: #2e2e2e;
     font-size: 16px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 8px;
     padding: 8px 12px;
     width: 256px;
@@ -71,7 +91,7 @@ button:hover {
 
 button.active-button {
     background-color: #0b6ff4;
-    border: 1px solid #0b6ff4;
+    border: 2px solid #0b6ff4;
     color: white;
 }
 
