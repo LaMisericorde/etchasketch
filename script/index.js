@@ -1,5 +1,5 @@
 // Variables
-const DEFAULT_CANVAS_SIZE = "480";
+const DEFAULT_CANVAS_SIZE = "640";
 const DEFAULT_GRID_SIZE = 16;
 const DEFAULT_BACKGROUND_COLOR = "#ffffff";
 const DEFAULT_COLOR_MODE_COLOR = "#000000";
@@ -76,7 +76,6 @@ function removeGrid() {
     }
 }
 
-
 // Hover over color changing
 
 function setGridBoxAttributes(gridBox) {
@@ -123,6 +122,8 @@ colorModeColor.addEventListener("click", changeDrawColor);
 function changeDrawColor() {
     drawMode = 0;
     drawColor = colorModeColor.value;
+    removeOldActiveButton();
+    colorMode.classList.add("active-button");
 }
 
 colorMode.addEventListener("click", () => {

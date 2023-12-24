@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #2e2e2e;
+    box-sizing: border-box;
+}
+
 .main-container {
     display: flex;
 }
@@ -12,20 +18,67 @@
 .settings-container {
     width: 25vw;
     height: 100vh;
-    background-color: red;
+    padding: 32px;
+    background-color: white;
+}
+
+p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+input {
+    height: 20px;
+    width: 128px;
+}
+
+input[type="color"] {
+    height: 32px;
+}
+
+#range-grid-size {
+    width: 144px;
+    margin-right: 32px;
+}
+
+#number-grid-size {
+    width: 64px;
+}
+
+.canvas-setting,
+.size-setting,
+.background-color-setting,
+.color-mode-setting {
+    margin-bottom: 32px;
 }
 
 button {
     display: block;
+    background-color: white;
+    color: #2e2e2e;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 256px;
+    margin-bottom: 12px;
 }
 
-.active-button {
-    background-color: yellow;
+button:hover {
+    background-color: whitesmoke;
+}
+
+button.active-button {
+    background-color: #0b6ff4;
+    border: 1px solid #0b6ff4;
+    color: white;
 }
 
 /* Display part of the screen */
 
 .display-container {
+    background-color: whitesmoke;
     width: 75vw;
     height: 100vh; 
     display: flex;  
@@ -36,6 +89,7 @@ button {
 .grid-container {
     display: flex;
     flex-direction: column;
+    border: 1px solid #1f1f1f;
 
     -webkit-user-drag: none;
     user-select: none;
